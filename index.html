@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Portfolio</title>
+<!-- Alles wat je wilt aanpassen staat in content.js. Kleuren kun je hier onder :root wijzigen. -->
+<style>
+:root{--navy:#0a2f45;--blue:#1560c4;--teal:#0f9d9a;--green:#4aa83a;--ink:#14263a;--mute:#52667a;--line:#b9cde0}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;min-height:100vh;padding:34px 16px 72px;font:14px/1.6 "Segoe UI",Tahoma,Verdana,sans-serif;color:var(--ink);
+background:radial-gradient(70% 55% at 15% 0%,#2a9cc4aa,transparent),radial-gradient(60% 50% at 100% 100%,#3aa851cc,transparent),linear-gradient(160deg,#08283b,#0b4a63 55%,#0e6b66) fixed}
+body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background:repeating-linear-gradient(0deg,#ffffff08 0 1px,transparent 1px 4px)}
+button{font:inherit;color:inherit}
+#win{max-width:1040px;margin:0 auto;border:1px solid #061f30;border-radius:8px 8px 3px 3px;overflow:hidden;box-shadow:0 24px 60px #000a,0 0 0 1px #5fb7ff55;background:rgba(246,251,254,.94)}
+.title{display:flex;align-items:center;gap:9px;padding:6px 6px 6px 10px;color:#fff;font:bold 13px "Trebuchet MS","Segoe UI",sans-serif;text-shadow:1px 1px #0a2a6a;background:linear-gradient(#3c92ee,#1560c4 14%,#0f55b8 60%,#0d4aa4);box-shadow:inset 0 1px #fff8}
+.title b{flex:1}.title .ic{width:14px;height:14px;border-radius:3px;background:linear-gradient(135deg,#7be35a,#12b3a0);box-shadow:0 0 0 1px #fff9}
+.wb{width:22px;height:22px;border:1px solid #fff;border-radius:3px;background:linear-gradient(#6bb6ff,#2a72e8);color:#fff;font-size:11px;cursor:default;line-height:1}
+.wb.x{background:linear-gradient(#f59a82,#d6391a);cursor:pointer}
+nav{display:flex;flex-wrap:wrap;gap:2px;padding:8px 12px 0;background:linear-gradient(#e3f1fb,#c8e0f3);border-bottom:1px solid #7ea6c8}
+nav button{padding:8px 18px;border:1px solid transparent;border-bottom:0;border-radius:4px 4px 0 0;background:none;cursor:pointer;color:#234}
+nav button:hover{background:#ffffffaa;border-color:var(--line)}
+nav button.on{background:#f6fbfe;border-color:#7ea6c8;font-weight:600;margin-bottom:-1px;box-shadow:inset 0 3px var(--green)}
+#view{padding:26px;min-height:64vh;animation:in .25s}
+@keyframes in{from{opacity:0}}
+.status{padding:5px 14px;font-size:12px;color:var(--mute);background:linear-gradient(#eef6fc,#d3e5f4);border-top:1px solid #9bb8d0}
+h2{margin:30px 0 14px;padding-left:10px;font:600 19px "Trebuchet MS","Segoe UI",sans-serif;color:var(--navy);border-left:4px solid var(--green)}
+h2:first-child{margin-top:0}
+.hero{position:relative;overflow:hidden;border-radius:8px;padding:34px 32px;color:#fff;background:linear-gradient(120deg,#0b4f9c,#0f9d9a 70%,#3fae5a);box-shadow:inset 0 0 0 1px #fff6}
+.hero::before{content:"";position:absolute;inset:0 0 55% 0;background:linear-gradient(#fff5,#fff0)}
+.hero::after{content:"";position:absolute;top:-60%;left:-40%;width:25%;height:220%;background:linear-gradient(90deg,transparent,#fff4,transparent);transform:rotate(20deg);animation:sh 7s 1s infinite}
+@keyframes sh{to{left:130%}}
+.hero>*{position:relative;z-index:1;margin:0}
+.hero small{display:block;opacity:.85;font-size:13px}
+.hero h1{margin:6px 0 4px;font:600 46px/1.1 "Trebuchet MS","Segoe UI",sans-serif;text-shadow:1px 2px #04304f88}
+.hero h3{margin:0;font-weight:400;font-size:19px;opacity:.95}
+.hero .t{max-width:540px;margin:14px 0 20px}
+.btn{display:inline-block;margin:0 8px 6px 0;padding:8px 20px;border:1px solid #1d6a14;border-radius:4px;color:#fff;font-weight:600;text-decoration:none;cursor:pointer;text-shadow:1px 1px #0a3a0a88;background:linear-gradient(#7fe05d,#3fae2a 50%,#2f9a22);box-shadow:inset 0 1px #fff9}
+.btn:hover{filter:brightness(1.1)}
+.btn.b2{border-color:#0a3a8a;text-shadow:1px 1px #0a2a6a88;background:linear-gradient(#6fb4f5,#2a72e8 50%,#1a5acc)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:20px}
+.card{background:#fff;border:1px solid var(--line);border-radius:6px;overflow:hidden;cursor:pointer;transition:.18s;box-shadow:0 2px 8px #0a2f4522}
+.card:hover{transform:translateY(-4px);border-color:var(--teal);box-shadow:0 12px 26px #0a2f4544}
+.thumb{position:relative;aspect-ratio:16/9;display:grid;place-items:center;padding:12px;text-align:center;color:#ffffffee;font:600 20px "Trebuchet MS",sans-serif;background:repeating-linear-gradient(0deg,#0003 0 2px,transparent 2px 4px),linear-gradient(135deg,#0b3f66,#0f9d9a)}
+.thumb img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.thumb::after{content:"";position:absolute;inset:0 0 58% 0;background:linear-gradient(#fff4,#fff0);pointer-events:none}
+.cb{padding:11px 14px 13px;border-top:2px solid var(--green)}
+.cb h3{margin:0;font:600 16px "Trebuchet MS","Segoe UI",sans-serif;color:var(--navy)}
+.cb p{margin:2px 0 8px;font-size:12.5px;color:var(--mute)}
+.chip{display:inline-block;margin:2px 4px 2px 0;padding:1px 9px;border:1px solid #8cc3b0;border-radius:10px;font-size:12px;background:linear-gradient(#f2fff7,#d3f2df)}
+.two{display:grid;grid-template-columns:210px 1fr;gap:28px}
+@media(max-width:700px){.two{grid-template-columns:1fr}.hero h1{font-size:34px}#tasks{display:none}}
+.photo{aspect-ratio:1;display:grid;place-items:center;overflow:hidden;color:#fff;font:600 54px "Trebuchet MS",sans-serif;border:3px solid #fff;border-radius:6px;box-shadow:0 0 0 1px var(--blue),0 8px 18px #0a2f4555;background:linear-gradient(135deg,#1560c4,#0f9d9a)}
+.photo img{width:100%;height:100%;object-fit:cover}
+.sk{display:flex;justify-content:space-between;font-weight:600}
+.bar{height:16px;margin:3px 0 12px;padding:2px;border:1px solid #6f9bb8;border-radius:3px;background:#fff}
+.bar i{display:block;height:100%;background:repeating-linear-gradient(90deg,#43c02f 0 8px,transparent 8px 10px);animation:gr .9s}
+@keyframes gr{from{width:0}}
+.tile{display:flex;align-items:center;gap:14px;padding:14px 16px;border:1px solid var(--line);border-radius:6px;color:var(--ink);text-decoration:none;background:linear-gradient(#fff,#e4f1fa);transition:.18s}
+.tile:hover{border-color:var(--teal);transform:translateY(-3px);box-shadow:0 8px 18px #0a2f4533}
+.tile span{flex:none;width:42px;height:42px;display:grid;place-items:center;border-radius:6px;color:#fff;font-weight:700;text-transform:uppercase;background:linear-gradient(135deg,#1560c4,#0f9d9a)}
+.tile b{display:block;color:var(--navy)}.tile small{color:var(--mute)}
+#ov{position:fixed;inset:0;z-index:50;display:none;place-items:center;padding:14px;background:#04182899;backdrop-filter:blur(3px)}
+#ov.show{display:grid}
+.dlg{width:min(680px,100%);max-height:90vh;overflow:auto;border:1px solid #061f30;border-radius:8px 8px 3px 3px;background:#f6fbfe;box-shadow:0 20px 50px #000a;animation:pop .2s}
+@keyframes pop{from{transform:scale(.94);opacity:0}}
+.db{padding:16px}
+.meta{display:grid;grid-template-columns:auto 1fr;gap:2px 16px;margin:14px 0}.meta dt{font-weight:600;color:var(--navy)}.meta dd{margin:0}
+#tb{position:fixed;left:0;right:0;bottom:0;z-index:40;height:38px;display:flex;align-items:center;gap:6px;padding-right:8px;border-top:2px solid #5aa0ff;background:linear-gradient(#3a8cf0,#245edb 15%,#1f52c8 85%,#1a45a8)}
+#start{height:100%;padding:0 22px 0 14px;border:0;border-radius:0 14px 14px 0;color:#fff;font:italic bold 19px "Trebuchet MS",sans-serif;text-shadow:1px 1px 2px #000a;cursor:pointer;background:linear-gradient(#6fdc55,#2f9a22 50%,#278a1b);box-shadow:inset 0 0 0 1px #fff5}
+#tasks{display:flex;gap:4px;margin-left:8px}
+#tasks button{height:28px;padding:0 14px;border:1px solid #0a3a9a;border-radius:3px;color:#fff;font-size:13px;cursor:pointer;background:linear-gradient(#4a8cf0,#2a62d8)}
+#tasks button.on{background:linear-gradient(#1a45a8,#2a62d8);box-shadow:inset 0 2px 4px #0008}
+#clock{margin-left:auto;height:100%;display:flex;align-items:center;padding:0 14px;color:#fff;font-size:13px;border-left:1px solid #0a4aa8;background:linear-gradient(#1aa5e8,#0f8ad0)}
+#sm{position:fixed;left:0;bottom:38px;z-index:45;width:250px;display:none;overflow:hidden;border:2px solid #1f52c8;border-radius:8px 8px 0 0;background:#fff;box-shadow:0 -6px 24px #0006}
+#sm.show{display:block}
+#sm header{padding:12px 14px;color:#fff;font:600 15px "Trebuchet MS",sans-serif;background:linear-gradient(#4aa8ff,#0a5fd8)}
+#sm button{display:block;width:100%;padding:9px 16px;border:0;text-align:left;background:none;cursor:pointer}
+#sm button:hover{background:#2a72e8;color:#fff}
+:focus-visible{outline:3px solid #f5a623;outline-offset:2px}
+@media(prefers-reduced-motion:reduce){*,::before,::after{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div id="win">
+  <div class="title"><span class="ic"></span><b id="ttl">Portfolio</b><span class="wb" aria-hidden="true">–</span><span class="wb" aria-hidden="true">□</span><span class="wb x" aria-hidden="true">✕</span></div>
+  <nav id="nav"></nav>
+  <main id="view"></main>
+  <div class="status" id="st"></div>
+</div>
+<div id="ov"></div>
+<div id="sm"><header id="smh"></header><div id="smi"></div></div>
+<div id="tb"><button id="start">start</button><div id="tasks"></div><div id="clock"></div></div>
+
+<script src="content.js"></script>
+<script>
+if(typeof SITE==='undefined'){document.body.innerHTML='<p style="font:16px Tahoma;color:#fff;padding:40px;max-width:560px">content.js niet gevonden. Zet index.html en content.js in dezelfde map en open index.html opnieuw.</p>';throw 0}
+const S=SITE,$=q=>document.querySelector(q),all=[...S.uitgelicht,...(S.overig||[])];
+const TABS=[["home","Start"],["work","Mijn werk"],["about","Over mij"],["socials","Socials"],["contact","Contact"]];
+document.title=S.naam+" – Game Developer Portfolio";
+$('#ttl').textContent=S.naam+" – Portfolio";
+$('#smh').textContent=S.naam;
+$('#st').textContent="© "+new Date().getFullYear()+" "+S.naam+" · "+S.opleiding;
+const btns=()=>TABS.map(t=>`<button data-t="${t[0]}" onclick="show('${t[0]}')">${t[1]}</button>`).join('');
+$('#nav').innerHTML=btns();$('#tasks').innerHTML=btns();
+$('#smi').innerHTML=TABS.map(t=>`<button onclick="show('${t[0]}')">${t[1]}</button>`).join('');
+const chips=a=>(a||[]).map(t=>`<span class="chip">${t}</span>`).join('');
+const thumb=g=>`<div class="thumb"><span>${g.titel}</span>${g.gif?`<img src="${g.gif}" alt="${g.titel}" onerror="this.remove()">`:''}</div>`;
+const card=(g,i)=>`<article class="card" tabindex="0" onclick="openGame(${i})" onkeydown="event.key=='Enter'&&openGame(${i})">${thumb(g)}<div class="cb"><h3>${g.titel}</h3><p>${[g.genre,g.engine,g.jaar].filter(Boolean).join(' · ')}</p>${chips((g.tags||[]).slice(0,3))}</div></article>`;
+function dlg(title,body){$('#ov').innerHTML=`<div class="dlg"><div class="title"><span class="ic"></span><b>${title}</b><button class="wb x" onclick="closeDlg()" aria-label="Sluiten">✕</button></div><div class="db">${body}</div></div>`;$('#ov').classList.add('show')}
+function closeDlg(){$('#ov').classList.remove('show')}
+function openGame(i){const g=all[i],m=[["Genre",g.genre],["Engine",g.engine],["Mijn rol",g.rol],["Team",g.team],["Jaar",g.jaar]].filter(x=>x[1]);
+dlg(g.titel,`${thumb(g)}<dl class="meta">${m.map(x=>`<dt>${x[0]}</dt><dd>${x[1]}</dd>`).join('')}</dl><p>${g.beschrijving||''}</p><p>${chips(g.tags)}</p><p>${(g.links||[]).map(l=>`<a class="btn" target="_blank" rel="noopener" href="${l.url}">${l.naam}</a>`).join('')}</p>`)}
+const V={
+home:()=>`<div class="hero"><small>${S.opleiding}</small><h1>${S.naam}</h1><h3>${S.rol}</h3><p class="t">${S.tagline}</p><button class="btn" onclick="show('work')">Bekijk mijn werk</button><button class="btn b2" onclick="show('contact')">Contact</button></div><h2>Uitgelichte games</h2><div class="grid">${S.uitgelicht.map(card).join('')}</div>`,
+work:()=>`<h2>Alle projecten</h2><div class="grid">${all.map(card).join('')}</div>`,
+about:()=>`<h2>Over mij</h2><div class="two"><div class="photo">${S.foto?`<img src="${S.foto}" alt="${S.naam}" onerror="this.parentNode.textContent='${S.naam.trim()[0]||''}'">`:(S.naam.trim()[0]||'')}</div><div>${S.overMij.map(p=>`<p>${p}</p>`).join('')}</div></div><h2>Skills</h2>${S.skills.map(s=>`<div class="sk"><span>${s[0]}</span><span>${s[1]}%</span></div><div class="bar"><i style="width:${s[1]}%"></i></div>`).join('')}<h2>Tools</h2>${chips(S.tools)}`,
+socials:()=>`<h2>Socials</h2><div class="grid">${S.socials.map(s=>`<a class="tile" target="_blank" rel="noopener" href="${s.url}"><span>${s.naam.slice(0,2)}</span><div><b>${s.naam}</b><small>${s.handle||''}</small></div></a>`).join('')}</div>`,
+contact:()=>`<h2>Contact</h2><p>Heb je een stage, een baan of een samenwerking in gedachten? Stuur me een mail.</p><p><a class="btn" href="mailto:${S.email}">${S.email}</a>${S.cv?`<a class="btn b2" href="${S.cv}" target="_blank">Download CV</a>`:''}</p>`
+};
+function show(id){if(!V[id])id='home';$('#view').innerHTML=V[id]();document.querySelectorAll('[data-t]').forEach(b=>b.classList.toggle('on',b.dataset.t==id));$('#sm').classList.remove('show');try{history.replaceState(0,'','#'+id)}catch(e){}scrollTo(0,0)}
+$('#start').onclick=e=>{e.stopPropagation();$('#sm').classList.toggle('show')};
+document.addEventListener('click',()=>$('#sm').classList.remove('show'));
+$('#ov').onclick=e=>{if(e.target.id=='ov')closeDlg()};
+addEventListener('keydown',e=>{if(e.key=='Escape')closeDlg()});
+const tick=()=>$('#clock').textContent=new Date().toLocaleTimeString('nl-NL',{hour:'2-digit',minute:'2-digit'});tick();setInterval(tick,3e4);
+show(location.hash.slice(1));
+</script>
+</body>
+</html>
